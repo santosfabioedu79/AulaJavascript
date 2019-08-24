@@ -1,30 +1,3 @@
-/*Lógica feita por mim
-Exibir um erro na coluna IMC do paciente Paulo, "Peso inválido" ou Altura inválida ou resultado do cálculo
-*/
-
-/*
-var peso = document.querySelector('.info-peso').textContent;
-var altura = document.querySelector('.info-altura').textContent;
- 
-
-var peso = 76;
-var altura = 0.39;
-console.log(peso / (altura* altura));
-var imc = document.querySelector('.info-imc');
-imc.textContent = (peso / (altura* altura));
-
-if(peso >= 1000 || peso <= 0 || altura >= 2.50 || altura <= 0.40){
-  //console.log("Dados inválido");
-  console.log(document.querySelector('.info-imc').textContent = "Dados Inválidos");
-} else{
-  //console.log("Peso Ok");
-  console.log(peso / (altura* altura));
-  var imc = document.querySelector('.info-imc');
-  imc.textContent = (peso / (altura* altura));
-}*/
-
-/*exemplo do professor*/
-
 var pacientes = document.querySelectorAll('.paciente');
 
 for (var i = 0; i < pacientes.length; i++) {
@@ -36,8 +9,8 @@ for (var i = 0; i < pacientes.length; i++) {
   var peso = tdpeso.textContent;
   var altura = tdaltura.textContent;
 
-  var pesoValido = validaValor(peso, 500, 46);
-  var alturaValida = validaValor(altura, 3, 0);
+  var pesoValido = validaPeso(peso);
+  var alturaValida = validaAltura(altura);
 
 
   if (!pesoValido) {
@@ -50,16 +23,28 @@ for (var i = 0; i < pacientes.length; i++) {
   }
 
   if (pesoValido && alturaValida) {
-    var calculo = peso / (altura * altura);
+    var calculo = calculaImc(peso, altura);
     tdimc.textContent = calculo.toFixed(2);
   }
 }
 
-function validaValor(valor, max, min){
-  if (peso >= max || peso <= min) {
+function validaPeso(valor){
+  if(valor >=500 || valor < 2){
     return false;
   }else{
     return true;
   }
+}
 
+function validaAltura(valor){
+  if(valor >= 3 || valor < 0){
+    return false;
+  }else{
+    return true;
+  }
+}
+
+function calculaImc(peso, altura){
+  var imc = peso / (altura * altura);
+  return imc;
 }
